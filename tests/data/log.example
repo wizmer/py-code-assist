@@ -1,0 +1,43 @@
+GLOB sdist-make: /home/bcoste/workspace/cdp-cli/setup.py
+py37 inst-nodeps: /home/bcoste/workspace/cdp-cli/.tox/.tmp/package/1/cdp-cli-0.1.0.zip
+py37 installed: absl-py==0.15.0,alabaster==0.7.12,asn1crypto==1.4.0,attrs==21.2.0,azure-common==1.1.27,azure-core==1.20.0,azure-storage-blob==12.9.0,Babel==2.9.1,backports.entry-points-selectable==1.1.0,black==21.10b0,bleach==4.1.0,boto3==1.19.12,botocore==1.22.12,bump2version==1.0.1,cdp-cli==0.1.0,certifi==2021.10.8,cffi==1.15.0,charset-normalizer==2.0.7,click==8.0.3,colorama==0.4.4,coverage==6.1.1,cryptography==3.4.8,cycler==0.11.0,databricks-api==0.6.0,databricks-cli==0.12.2,defusedxml==0.7.1,distlib==0.3.3,docutils==0.17.1,-e git+ssh://git@github.com/pepsico-ecommerce/ds-cdp.git@dd64f1a2e7c0577d0a0bb188807b6fd898d499d8#egg=ds_cdp,editpyxl==0.1.9,et-xmlfile==1.1.0,filelock==3.3.2,flake8==4.0.1,greenlet==1.1.2,idna==3.3,imagesize==1.2.0,importlib-metadata==4.2.0,iniconfig==1.1.1,isodate==0.6.0,jeepney==0.7.1,Jinja2==3.0.2,jira==3.0.1,jmespath==0.10.0,joblib==1.1.0,keyring==23.2.1,kiwisolver==1.3.2,lark==0.11.3,lxml==4.6.4,MarkupSafe==2.0.1,matplotlib==3.4.3,mccabe==0.6.1,more-itertools==8.10.0,moto==2.2.13,msrest==0.6.21,mypy-extensions==0.4.3,numpy==1.21.4,oauthlib==3.1.1,openpyxl==3.0.9,oscrypto==1.2.1,packaging==21.2,pandas==1.3.4,pathspec==0.9.0,patsy==0.5.2,Pillow==8.4.0,pkginfo==1.7.1,platformdirs==2.4.0,pluggy==1.0.0,py==1.11.0,py4j==0.10.9.2,pyarrow==6.0.0,pycodestyle==2.8.0,pycparser==2.21,pycryptodomex==3.11.0,pyflakes==2.4.0,Pygments==2.10.0,PyJWT==2.3.0,pyOpenSSL==20.0.1,pyparsing==2.4.7,pyspark==3.2.0,pytest==6.2.5,python-dateutil==2.8.2,pytz==2021.3,readme-renderer==30.0,regex==2021.11.2,requests==2.26.0,requests-oauthlib==1.3.0,requests-toolbelt==0.9.1,responses==0.15.0,rfc3986==1.5.0,s3transfer==0.5.0,scikit-learn==1.0.1,scipy==1.7.2,SecretStorage==3.3.1,six==1.16.0,sklearn==0.0,snowballstemmer==2.1.0,snowflake-connector-python==2.7.0,snowflake-sqlalchemy==1.3.2,Sphinx==4.2.0,sphinxcontrib-applehelp==1.0.2,sphinxcontrib-devhelp==1.0.2,sphinxcontrib-htmlhelp==2.0.0,sphinxcontrib-jsmath==1.0.1,sphinxcontrib-qthelp==1.0.3,sphinxcontrib-serializinghtml==1.1.5,SQLAlchemy==1.4.26,statsmodels==0.13.0,tabulate==0.8.9,tenacity==8.0.1,threadpoolctl==3.0.0,toml==0.10.2,tomli==1.2.2,tox==3.24.4,tqdm==4.62.3,twine==3.5.0,typed-ast==1.4.3,typing-extensions==3.10.0.2,urllib3==1.26.7,virtualenv==20.10.0,watchdog==2.1.6,webencodings==0.5.1,Werkzeug==2.0.2,XlsxWriter==3.0.2,xmltodict==0.12.0,zipp==3.6.0
+py37 run-test-pre: PYTHONHASHSEED='2504551225'
+py37 run-test: commands[0] | pip install -U pip
+Requirement already satisfied: pip in ./.tox/py37/lib/python3.7/site-packages (21.3.1)
+py37 run-test: commands[1] | pytest --basetemp=/home/bcoste/workspace/cdp-cli/.tox/py37/tmp
+============================= test session starts ==============================
+platform linux -- Python 3.7.12, pytest-6.2.5, py-1.11.0, pluggy-1.0.0
+cachedir: .tox/py37/.pytest_cache
+rootdir: /home/bcoste/workspace/cdp-cli, configfile: setup.cfg
+collected 10 items / 1 error / 9 selected
+
+==================================== ERRORS ====================================
+____________________ ERROR collecting tests/test_ticket.py _____________________
+ImportError while importing test module '/home/bcoste/workspace/cdp-cli/tests/test_ticket.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../../.pyenv/versions/3.7.12/lib/python3.7/importlib/__init__.py:127: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_ticket.py:10: in <module>
+    import cdp_cli.ticket as tested
+cdp_cli/ticket.py:15: in <module>
+    import yaml
+E   ModuleNotFoundError: No module named 'yaml'
+=============================== warnings summary ===============================
+.tox/py37/lib/python3.7/site-packages/_pytest/config/__init__.py:1233
+  /home/bcoste/workspace/cdp-cli/.tox/py37/lib/python3.7/site-packages/_pytest/config/__init__.py:1233: PytestConfigWarning: Unknown config option: collect_ignore
+
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+.tox/py37/lib/python3.7/site-packages/snowflake/connector/options.py:97
+  /home/bcoste/workspace/cdp-cli/.tox/py37/lib/python3.7/site-packages/snowflake/connector/options.py:97: UserWarning: You have an incompatible version of 'pyarrow' installed (6.0.0), please install a version that adheres to: 'pyarrow<5.1.0,>=5.0.0; extra == "pandas"'
+    _expected_pyarrow_version,
+
+-- Docs: https://docs.pytest.org/en/stable/warnings.html
+=========================== short test summary info ============================
+ERROR tests/test_ticket.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+========================= 2 warnings, 1 error in 1.08s =========================
+ERROR: InvocationError for command /home/bcoste/workspace/cdp-cli/.tox/py37/bin/pytest --basetemp=/home/bcoste/workspace/cdp-cli/.tox/py37/tmp (exited with code 2)
+___________________________________ summary ____________________________________
+ERROR:   py37: commands failed
