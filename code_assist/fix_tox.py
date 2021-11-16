@@ -13,9 +13,9 @@ MISSING_MODULE = "ModuleNotFoundError: No module named '(.*?)'"
 
 def add_dependency(root, dep):
     """Add a missing dependency to a setup.py or dependency file."""
-    setup_file = Path("setup.py")
-    req_file = Path("requirements.txt")
-    req_dev_file = Path("requirements_dev.txt")
+    setup_file = Path(root, "setup.py")
+    req_file = Path(root, "requirements.txt")
+    req_dev_file = Path(root, "requirements_dev.txt")
 
     test_deps = {
         "pip",
