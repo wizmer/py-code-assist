@@ -40,44 +40,5 @@ def test_add_test_function(mock_python_project):
     print(test_file.open().read())
 
 def test_add_missing_test_functions(mock_python_project):
-    tested.add_missing_test_functions('/home/bcoste/workspace/fix-tox/fix_tox/testing.py')
-
-
-def test__fill_template():
-    tested._fill_template()
-
-
-def test_list_functions():
-    tested.list_functions()
-
-
-def test_add_test_file():
-    tested.add_test_file()
-
-
-def test_up_dir():
-    tested.up_dir()
-
-
-def test_list_functions1():
-    tested.list_functions1()
-
-
-def test_add_test_function():
-    tested.add_test_function()
-
-
-def test_corresponding_module_name():
-    tested.corresponding_module_name()
-
-
-def test_add_missing_test_functions():
-    tested.add_missing_test_functions()
-
-
-def test_corresponding_test_filename():
-    tested.corresponding_test_filename()
-
-
-def test_is_mod_function():
-    tested.is_mod_function()
+    # tested.add_missing_test_functions('/home/bcoste/workspace/code-assist/fix_tox/testing.py')
+    pass

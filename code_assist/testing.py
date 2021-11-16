@@ -127,7 +127,3 @@ def add_missing_test_functions(filename):
     missing_tests = set(list_functions(module)) - test_functions
     for missing in missing_tests:
         add_test_function(filename, missing)
-
-
-def one_more():
-    pass
