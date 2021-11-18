@@ -17,8 +17,11 @@ def cli():
 @cli.command()
 @click.argument("logfile")
 def fix_tox(logfile):
-    """Fix setup.py"""
-    fixer.fix(Path(logfile), Path("setup.py"))
+    """Fix setup.py
+
+    It will try to add the missing imports if it is detected that the were a MissingImportError
+    """
+    fixer.fix(Path(logfile))
 
 
 @cli.command()

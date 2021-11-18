@@ -1,11 +1,9 @@
+import re
 import shutil
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-import pytest
-
 import code_assist.fix_tox as tested
-
 
 DATA = Path(__file__).parent / "data"
 
@@ -23,4 +21,4 @@ def test_add_dependency(mocker):
         assert req_file.exists()
         assert "statsmodels" not in req_file.open().read()
         tested.add_dependency(package, "statsmodels")
-        assert "statsmodels" in req_file.open().read()
+        assert re.search(r"statsmodels(.*)\n", req_file.open().read())

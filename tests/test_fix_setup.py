@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-import fix_tox.fix_setup as tested
+import code_assist.fix_setup as tested
 
 DATA = Path(__file__).parent / "data"
 

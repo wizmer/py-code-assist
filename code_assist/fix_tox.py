@@ -9,6 +9,7 @@ from code_assist.fix_setup import add_missing_module, _check_existing_import
 
 
 MISSING_MODULE = "ModuleNotFoundError: No module named '(.*?)'"
+MISSING_PYTEST_COV = "unrecognized arguments: --cov-report"
 
 
 def add_dependency(root, dep):
@@ -31,6 +32,7 @@ def add_dependency(root, dep):
         "pymock",
         "pytest",
         "pytest-mock",
+        "pytest-cov",
     }
 
     if dep in test_deps:
@@ -51,7 +53,7 @@ def add_dependency(root, dep):
         version = _check_existing_import(dep)
         assert version
         with open(the_file, "a") as f:
-            f.write(f"{dep}>={version}")
+            f.write(f"{dep}>={version}\n")
     else:
         filename = Path("setup.py")
         lines = add_missing_module(setup_file, dep)
@@ -65,9 +67,11 @@ def get_missing_module(filename):
         m = re.search(MISSING_MODULE, line)
         if m:
             return m.groups()[0]
+        if MISSING_PYTEST_COV in line:
+            return "pytest-cov"
 
 
-def fix(logfile, setup_file):
+def fix(logfile):
     missing = get_missing_module(logfile)
     if not missing:
         return
