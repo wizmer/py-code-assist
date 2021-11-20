@@ -17,7 +17,8 @@ def mock_python_project():
     origin = Path().absolute()
     with TemporaryDirectory() as folder:
         folder = Path(folder)
-        os.mknod(folder / "setup.py")
+        with open(folder / "setup.py", 'w') as f:
+            f.write('')
         src_file = folder / "a/b/c/d.py"
         src_file.parent.mkdir(parents=True)
         os.chdir(folder)

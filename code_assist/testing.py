@@ -62,7 +62,7 @@ def corresponding_module_name(filename):
     assert root
     root = Path(root)
     hierarchy = filename.relative_to(root).with_suffix("")
-    return str(hierarchy).replace("/", ".")
+    return str(hierarchy).replace(os.sep, ".")
 
 
 def add_test_file(filename):

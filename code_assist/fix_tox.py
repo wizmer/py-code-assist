@@ -72,6 +72,12 @@ def get_missing_module(filename):
 
 
 def fix(logfile):
+    '''Attempt to fix everything it can from reading the log file
+
+    Args:
+        logfile: the tox stdout/stderr log file
+        unfair: I do not exist
+    '''
     missing = get_missing_module(logfile)
     if not missing:
         return
