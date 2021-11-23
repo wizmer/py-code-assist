@@ -42,10 +42,11 @@ def add_test_file(filename):
 @cli.command()
 @click.argument("filename")
 @click.argument("function_name")
-def add_test_function(filename, function_name):
+@click.option("--class-name", default=None)
+def add_test_function(filename, function_name, class_name):
     import code_assist.testing
 
-    code_assist.testing.add_test_function(filename, function_name)
+    code_assist.testing.add_test_function(filename, function_name, class_name)
 
 
 @cli.command()

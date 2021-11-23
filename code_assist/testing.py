@@ -85,24 +85,35 @@ def add_test_file(filename):
     return test_file
 
 
-def add_test_function(filename, original_function_name):
+def add_test_function(filename, original_function_name, class_name=None):
     """Add a test function in order to test original function"""
 
     module_name = corresponding_module_name(filename)
     module = __import__(module_name, fromlist=[""])
-    the_func = module.__dict__[original_function_name]
-    args = ", ".join(inspect.getfullargspec(the_func).args)
-    test_file = add_test_file(filename)
-    with test_file.open("a") as f:
-        f.write(
-            dedent(
-                f"""
 
-        def test_{original_function_name}():
+    if class_name:
+        the_func = module.__dict__[class_name].__dict__[original_function_name]
+        args = ", ".join(inspect.getfullargspec(the_func).args[1:])
+        test_func_name = f"test_{class_name}_{original_function_name}"
+        body = f"""
+
+        def {test_func_name}():
+            obj = {class_name}()
+            obj.{original_function_name}({args})
+        """
+    else:
+        the_func = module.__dict__[original_function_name]
+        args = ", ".join(inspect.getfullargspec(the_func).args)
+        test_func_name = f"test_{original_function_name}"
+        body = f"""
+
+        def {test_func_name}():
             tested.{original_function_name}({args})
         """
-            )
-        )
+    test_file = add_test_file(filename)
+
+    with test_file.open("a") as f:
+        f.write(dedent(body))
 
     return test_file
 

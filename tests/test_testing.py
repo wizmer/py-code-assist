@@ -7,6 +7,8 @@ import pytest
 
 import code_assist.testing as tested
 
+DATA = Path(__file__).parent / "data"
+
 
 @pytest.fixture()
 def mock_python_project():
@@ -16,10 +18,9 @@ def mock_python_project():
     """
     origin = Path().absolute()
     tempdir = TemporaryDirectory()
-    folder = Path(tempdir.name, 'test-code-assist')
+    folder = Path(tempdir.name, "test-code-assist")
     folder.mkdir(exist_ok=True)
-    with open(folder / "setup.py", 'w') as f:
-        f.write('')
+    os.mknod(folder / "setup.py")
     src_file = folder / "a/b/c/d.py"
     src_file.parent.mkdir(parents=True)
     os.chdir(folder)
@@ -33,6 +34,10 @@ def mock_python_project():
         def another_function_with_args(args1, args2):
             print(a)
 
+        class AClass:
+            def a_method(self, arg1, arg2):
+                print(arg1, arg2)
+
         """
             )
         )
@@ -40,16 +45,17 @@ def mock_python_project():
     yield src_file
     os.chdir(origin)
 
+
 def test_corresponding_test_filename(mock_python_project):
     filename = tested.corresponding_test_filename(mock_python_project)
-    assert filename.relative_to(os.getcwd()) == Path('tests/b/c/test_d.py')
+    assert filename.relative_to(os.getcwd()) == Path("tests/b/c/test_d.py")
+
 
 def test_add_test_file(mock_python_project):
     test_file = tested.add_test_file(mock_python_project)
     assert test_file.exists()
     with open(test_file) as f:
         assert "import a.b.c.d as tested" in f.read()
-
 
 
 def test_add_test_function(mock_python_project):
@@ -62,7 +68,10 @@ def test_add_test_function(mock_python_project):
         "    tested.another_function_with_args(args1, args2)"
     ) in test_file.open().read()
 
+    test_file = tested.add_test_function(
+        mock_python_project,
+        "a_method",
+        "AClass",
+    )
 
-def test_add_missing_test_functions(mock_python_project):
-    # tested.add_missing_test_functions('/home/bcoste/workspace/code-assist/fix_tox/testing.py')
-    pass
+    assert (DATA / "add-test-function.py").open().read() == test_file.open().read()

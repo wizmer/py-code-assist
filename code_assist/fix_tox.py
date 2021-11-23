@@ -20,10 +20,12 @@ def add_dependency(root, dep):
 
     test_deps = {
         "pip",
+        "black",
         "bump2version",
         "wheel",
         "watchdog",
         "flake8",
+        "isort",
         "tox",
         "coverage",
         "Sphinx",
