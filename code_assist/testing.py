@@ -50,7 +50,7 @@ def corresponding_test_filename(filename):
     root = up_dir("setup.py", filename.parent)
     assert root
     root = Path(root)
-    hierarchy = Path(*filename.relative_to(root).parent.parts[2:])
+    hierarchy = Path(*filename.relative_to(root).parent.parts[1:])
     test_file = root / "tests" / hierarchy / ("test_" + filename.name)
     return test_file
 

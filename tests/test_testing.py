@@ -15,35 +15,41 @@ def mock_python_project():
     And temporary change the current directory to it
     """
     origin = Path().absolute()
-    with TemporaryDirectory() as folder:
-        folder = Path(folder)
-        with open(folder / "setup.py", 'w') as f:
-            f.write('')
-        src_file = folder / "a/b/c/d.py"
-        src_file.parent.mkdir(parents=True)
-        os.chdir(folder)
-        with src_file.open("w") as f:
-            f.write(
-                dedent(
-                    """
-            def a_function(a):
-                print(a)
+    tempdir = TemporaryDirectory()
+    folder = Path(tempdir.name, 'test-code-assist')
+    folder.mkdir(exist_ok=True)
+    with open(folder / "setup.py", 'w') as f:
+        f.write('')
+    src_file = folder / "a/b/c/d.py"
+    src_file.parent.mkdir(parents=True)
+    os.chdir(folder)
+    with src_file.open("w") as f:
+        f.write(
+            dedent(
+                """
+        def a_function(a):
+            print(a)
 
-            def another_function_with_args(args1, args2):
-                print(a)
+        def another_function_with_args(args1, args2):
+            print(a)
 
-            """
-                )
+        """
             )
-        assert src_file.exists()
-        yield src_file
+        )
+    assert src_file.exists()
+    yield src_file
     os.chdir(origin)
 
+def test_corresponding_test_filename(mock_python_project):
+    filename = tested.corresponding_test_filename(mock_python_project)
+    assert filename.relative_to(os.getcwd()) == Path('tests/b/c/test_d.py')
 
 def test_add_test_file(mock_python_project):
     test_file = tested.add_test_file(mock_python_project)
     assert test_file.exists()
-    assert "import a.b.c.d as tested" in test_file.open().read()
+    with open(test_file) as f:
+        assert "import a.b.c.d as tested" in f.read()
+
 
 
 def test_add_test_function(mock_python_project):
