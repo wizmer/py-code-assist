@@ -5,8 +5,7 @@ from pathlib import Path
 
 import click
 
-from code_assist.fix_setup import add_missing_module, _check_existing_import
-
+from code_assist.fix_setup import _check_existing_import, add_missing_module
 
 MISSING_MODULE = "ModuleNotFoundError: No module named '(.*?)'"
 MISSING_PYTEST_COV = "unrecognized arguments: --cov-report"
@@ -74,12 +73,11 @@ def get_missing_module(filename):
 
 
 def fix(logfile):
-    '''Attempt to fix everything it can from reading the log file
+    """Attempt to fix everything it can from reading the log file
 
     Args:
         logfile: the tox stdout/stderr log file
-        unfair: I do not exist
-    '''
+    """
     missing = get_missing_module(logfile)
     if not missing:
         return

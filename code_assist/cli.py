@@ -55,3 +55,17 @@ def watch(root_dir):
     import code_assist.watcher
 
     code_assist.watcher.watch(root_dir)
+
+
+@cli.command()
+@click.argument("filename")
+@click.argument("function_name")
+def get_docstring(filename, function_name):
+    import json
+
+    import code_assist.docstring
+
+    docstring, line_numbers = code_assist.docstring.get_docstring(
+        filename, function_name
+    )
+    click.echo(json.dumps({"docstring": docstring, "range": line_numbers}))
