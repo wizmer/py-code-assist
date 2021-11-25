@@ -37,3 +37,16 @@ def docstring_args_on_multiple_lines(
     Here are more notes about the docstring.
     """
     pass
+
+
+def preprocess_data(df, df2):
+    """Prepares DF for analysis.
+
+    Args:
+        df (Spark DF): DF for analysis
+
+    Returns:
+        Here is a multiline return
+            as stated, it runs on 2 lines
+    """
+    pass

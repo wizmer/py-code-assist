@@ -34,7 +34,7 @@ class Docstring:
 
 def parse_params(param_paragraph):
     params = param_paragraph.split("\n")[1:]
-    regex = r"^\s*([a-zA-Z0-9_]+):"
+    regex = r"^\s*([a-zA-Z0-9_]+)\s*(\(.*\))?:"
     return {
         re.match(regex, lines[0]).group(1): "\n".join(lines)
         for lines in split_before(params, lambda s: re.match(regex, s))

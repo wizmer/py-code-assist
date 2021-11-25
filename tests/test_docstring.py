@@ -18,7 +18,6 @@ def test_generate_docstring():
 
 def test_get_existing_docstring():
     sample_file = DATA / "google_docstring_style.py"
-    assert sample_file.exists()
     docstring, (start, end) = tested.get_docstring(
         sample_file, "func_missing_arg_in_docstring"
     )
@@ -40,7 +39,6 @@ def test_get_existing_docstring():
 """
     )
 
-    assert sample_file.exists()
     docstring, (start, end) = tested.get_docstring(
         sample_file, "docstring_args_on_multiple_lines"
     )
@@ -61,6 +59,23 @@ def test_get_existing_docstring():
         args7_to_ensure_more_lines:
 
     Here are more notes about the docstring.
+    \"\"\"
+"""
+    )
+
+    docstring, (start, end) = tested.get_docstring(sample_file, "preprocess_data")
+
+    assert (
+        docstring
+        == """    \"\"\"Prepares DF for analysis.
+
+    Args:
+        df (Spark DF): DF for analysis
+        df2:
+
+    Returns:
+        Here is a multiline return
+            as stated, it runs on 2 lines
     \"\"\"
 """
     )
